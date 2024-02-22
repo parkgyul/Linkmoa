@@ -24,6 +24,9 @@ function Login() {
   };
 
   const onNaverLogin = () => {
+    window.location.href = "http://localhost:8080/login/oauth2/code/naver";
+  };
+  const onGoogleLogin = () => {
     window.location.href = "http://localhost:8080/login/oauth2/code/google";
   };
   const getData = () => {
@@ -72,6 +75,7 @@ function Login() {
           <br />
           <br />
           <button onClick={onNaverLogin}>NAVER LOGIN</button>
+          <button onClick={onGoogleLogin}>GOOGLE LOGIN</button>
           <button onClick={getData}>Get Data</button>
         </form>
       </div>
