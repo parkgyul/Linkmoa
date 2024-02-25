@@ -74,6 +74,9 @@ function Login() {
           </button>
           <br />
           <br />
+          <a href="https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code">
+            카카오로그인
+          </a>
           <button onClick={onNaverLogin}>NAVER LOGIN</button>
           <button onClick={onGoogleLogin}>GOOGLE LOGIN</button>
           <button onClick={getData}>Get Data</button>
