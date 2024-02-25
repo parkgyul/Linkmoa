@@ -3,6 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom"; // 또는 HashRouter 사용 가능
 import App from "./App";
+import "./scss/style.scss";
 
 ReactDOM.render(
   <Router>

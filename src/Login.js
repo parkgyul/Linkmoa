@@ -5,6 +5,7 @@ function Login() {
   //상태 변화를 기록하기 위함.
   const [inputId, setInputId] = useState("");
   const [inputPw, setInputPw] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate(); // useNavigate 훅을 사용
 
   const handleInputId = (e) => {
@@ -29,8 +30,13 @@ function Login() {
   const onGoogleLogin = () => {
     window.location.href = "http://localhost:8080/login/oauth2/code/google";
   };
+
+  const handleGoogleLoginSuccess = () =>{
+    setIsLoggedIn(true);
+
+  }
   const getData = () => {
-    fetch("http://localhost:8080/login/oauth2/code/google", {
+    fetch("http://localhost:8080/my", {
       method: "GET",
       credentials: "include",
     })
@@ -45,7 +51,7 @@ function Login() {
       })
       .catch((error) => alert(error));
   };
-  console.log("login 실행중");
+
   return (
     <div>
       <div
@@ -79,7 +85,7 @@ function Login() {
           </a>
           <button onClick={onNaverLogin}>NAVER LOGIN</button>
           <button onClick={onGoogleLogin}>GOOGLE LOGIN</button>
-          <button onClick={getData}>Get Data</button>
+          <button type = "button" onClick={getData}>Get Data</button>
         </form>
       </div>
     </div>
