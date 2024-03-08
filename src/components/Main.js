@@ -1,13 +1,22 @@
 import React, { useState, useRef, useCallback } from "react";
-import { PlusSquareFilled } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import Modal from "./Modal";
 import ReModal from "./ReModal";
 import plus from "./more.png";
 import folder from "./folder.png";
+import classNames from "classnames";
+import styles from "../scss/style.scss";
+
 function Main() {
+  const navigate = useNavigate();
   const [memos, setMemos] = useState([]);
   const [modalState, setModalState] = useState(false);
   const [reModalState, setReModalState] = useState(false);
+
+  //플러스 버튼 누를시 고르기
+  const dropDownRef = useRef(null);
+  const [isOpen, setIsOpen] = useState(false);
+  console.log("isOpen", isOpen);
   const [clickmemo, setClickmemo] = useState({
     id: "",
     title: "",
@@ -75,6 +84,28 @@ function Main() {
     },
     [memos]
   );
+  const handleMenuClick = (action) => {
+    // 각 메뉴 항목 클릭 시 실행될 함수
+    // action에 따라 다른 작업을 수행할 수 있습니다.
+    switch (action) {
+      case "createDirectory":
+        // 디렉토리 생성 작업 수행
+        console.log("디렉토리 생성.");
+        break;
+      case "createLink":
+        // 링크 생성 작업 수행
+        console.log("링크를 생성합니다.");
+        break;
+      case "createSharePage":
+        // 공유 페이지 생성 작업 수행
+        console.log("공유 페이지를 생성합니다.");
+        break;
+      default:
+        break;
+    }
+    // 드롭다운 메뉴를 닫음
+    setIsOpen(false);
+  };
 
   return (
     <div>
@@ -84,12 +115,31 @@ function Main() {
         <table>
           <tbody>
             <td>
-              <div onClick={openModal}>
+              <div onClick={() => setIsOpen(!isOpen)}>
                 <img
                   src={plus}
                   alt="플러스"
                   style={{ width: "100px", height: "100px", padding: 20 }}
                 />
+                {isOpen && (
+                  <ul>
+                    <li>
+                      <button onClick={openModal}>디렉토리 생성</button>
+                    </li>
+                    <li>
+                      <button onClick={() => handleMenuClick("createLink")}>
+                        링크 생성
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => handleMenuClick("createSharePage")}
+                      >
+                        공유 페이지 생성
+                      </button>
+                    </li>
+                  </ul>
+                )}
               </div>
             </td>
             <td>
@@ -103,6 +153,7 @@ function Main() {
                       src={folder}
                       alt="folder"
                       style={{ width: "100px", height: "100px", padding: 5 }}
+                      onDoubleClick={() => navigate("/inDirectory")}
                     />
                     <h2 style={{ margin: 0 }}>{memo.title}</h2>
                   </div>
@@ -125,6 +176,7 @@ function Main() {
             onUpdate={onUpdate}
           />
         </main>
+        <test />
       </div>
     </div>
   );

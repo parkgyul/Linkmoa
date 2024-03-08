@@ -21,7 +21,6 @@ function Modal({ state, closeModal, onInsert }) {
     <React.Fragment>
       <div>
         <div>
-          <h1>제목</h1>
           <form onSubmit={onSubmit}>
             <div className="content">
               <h4>
